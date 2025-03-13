@@ -1,120 +1,236 @@
-import java.awt.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
-
         Menu menu = new Menu();
-        menu.imprimirMensagem(Scanner sc);
-        switch (opcao) {
-            case 1:
-                System.out.println("O que Você deseja Incluir? \n" +
-                        "(1) Eletronico - (2) Roupa - (3) Alimento - (0) Cancelar");
+        ArrayList<Alimento> alimentos = new ArrayList<>();
+        ArrayList<Eletronico> eletronicos = new ArrayList<>();
+        ArrayList<Roupa> roupas = new ArrayList<>();
 
-                int opcao1 = sc.nextInt();
+        int opcao;
 
-                switch (opcao1){
-                    case 0:
+        do {
+            opcao = menu.imprimirMensagem(sc);  // Solicita a opção principal
 
-                        break;
-                    case 1:
+            switch (opcao) {
 
-                        break;
-                    case 2:
+                case 1:
+                    System.out.println("O que Você deseja Incluir? \n" +
+                            "(1) Eletronico - (2) Roupa - (3) Alimento - (0) Cancelar");
 
-                        break;
-                    case 3:
+                    int opcao1 = sc.nextInt();
+                    sc.nextLine(); // Consumir a quebra de linha pendente
 
-                        break;
-                }
-                break;
+                    switch (opcao1) {
+                        case 0:
+                            break; // Volta ao menu principal
+                        case 1:
+                            while (true) {
+                                System.out.print("Nome: ");
+                                String nome = sc.nextLine();
 
-            case 2:
-                System.out.println("O que Você deseja Alterar? \n" +
-                    "(1) Eletronico - (2) Roupa - (3) Alimento - (0) Cancelar");
+                                System.out.print("Código: ");
+                                String codigo = sc.nextLine();
 
-                int opcao2 = sc.nextInt();
+                                System.out.print("Qual o valor: ");
+                                double valor = sc.nextDouble();
+                                sc.nextLine(); // Consumir a quebra de linha pendente
 
-                switch (opcao2){
-                    case 0:
+                                System.out.print("Marca: ");
+                                String marca = sc.nextLine();
 
-                        break;
-                    case 1:
+                                System.out.print("Garantia em Meses: ");
+                                int garantiaMeses = sc.nextInt();
+                                sc.nextLine(); // Consumir a quebra de linha pendente
 
-                        break;
-                    case 2:
+                                // Criando o objeto Eletronico com os valores fornecidos
+                                Eletronico eletronico = new Eletronico(nome, codigo, valor, marca, garantiaMeses);
 
-                        break;
-                    case 3:
+                                // Adicionando o produto ao ArrayList
+                                eletronicos.add(eletronico);
 
-                        break;
-                }
-                break;
-            case 3:
-                System.out.println("O que Você deseja Excluir? \n" +
-                        "(1) Eletronico - (2) Roupa - (3) Alimento - (0) Cancelar");
+                                System.out.print("Deseja adicionar outro produto? (s/n): ");
+                                String resposta = sc.nextLine();
 
-                int opcao3 = sc.nextInt();
+                                if (!resposta.equalsIgnoreCase("s")) {
+                                    break; // Sai do loop se a resposta não for "s"
+                                }
+                            }
+                            break;
+                        case 2:
+                            while (true) {
+                                System.out.print("Nome: ");
+                                String nome = sc.nextLine();
 
-                switch (opcao3){
-                    case 0:
+                                System.out.print("Código: ");
+                                String codigo = sc.nextLine();
 
-                        break;
-                    case 1:
+                                System.out.print("Qual o valor: ");
+                                double valor = sc.nextDouble();
+                                sc.nextLine(); // Consumir a quebra de linha pendente
 
-                        break;
-                    case 2:
+                                System.out.print("Tamanho: ");
+                                String tamanho = sc.nextLine();
 
-                        break;
-                    case 3:
+                                System.out.print("Material: ");
+                                String material = sc.nextLine();
 
-                        break;
-                }
-                break;
-            case 4:
-                System.out.println("O que Você deseja listar? \n" +
-                        "(1) Eletronico - (2) Roupa - (3) Alimento - (0) Cancelar");
+                                Roupa roupa = new Roupa(nome, codigo, valor, tamanho, material);
 
-                int opcao0 = sc.nextInt();
+                                // Adicionando o produto ao ArrayList
+                                roupas.add(roupa);
 
-                switch (opcao0){
-                    case 0:
+                                System.out.print("Deseja adicionar outro produto? (s/n): ");
+                                String resposta = sc.nextLine();
 
-                        break;
-                    case 1:
+                                if (!resposta.equalsIgnoreCase("s")) {
+                                    break; // Sai do loop se a resposta não for "s"
+                                }
+                            }
+                            break;
+                        case 3:
+                            while (true) {
+                                System.out.print("Nome: ");
+                                String nome = sc.nextLine();
 
-                        break;
-                    case 2:
+                                System.out.print("Código: ");
+                                String codigo = sc.nextLine();
 
-                        break;
-                    case 3:
+                                System.out.print("Qual o valor: ");
+                                double valor = sc.nextDouble();
+                                sc.nextLine(); // Consumir a quebra de linha pendente
 
-                        break;
-                }
-                break;
-            case 5:
-                System.out.println("Obrigado, Volte sempre!");
-                break;
-            default:
-                System.out.println("Opção inválida.");
-                break;
-        }
+                                System.out.print("Qual a categoria: ");
+                                String categoria = sc.nextLine();
 
+                                // Lendo a data de validade como String e convertendo para LocalDate
+                                System.out.print("Data de Validade (AAAA-MM-DD): ");
+                                String dataValidadeStr = sc.nextLine();
+                                LocalDate dataValidade = LocalDate.parse(dataValidadeStr); // Converte a String para LocalDate
 
-        }
+                                // Criando o objeto Alimento com os valores fornecidos
+                                Alimento alimento = new Alimento(nome, codigo, valor, categoria, dataValidade);
 
-        public void imprimirMensagem(Scanner sc) {
+                                // Adicionando o produto ao ArrayList
+                                alimentos.add(alimento);
 
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~ Bem Vindo ~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("Escolha uma das Opções: \n" +
-                    "(1) - Incluir \n" +
-                    "(2) - Alterar \n" +
-                    "(3) - Excluir \n" +
-                    "(4) - Listar \n" +
-                    "(5) - Sair");
+                                System.out.print("Deseja adicionar outro produto? (s/n): ");
+                                String resposta = sc.nextLine();
 
-            int opcao = sc.nextInt();  // Lê a entrada do usuário
+                                if (!resposta.equalsIgnoreCase("s")) {
+                                    break; // Sai do loop se a resposta não for "s"
+                                }
+                            }
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                            break;
+                    }
+                    break;
 
+                case 2:
+                    System.out.println("O que Você deseja Alterar? \n" +
+                            "(1) Eletronico - (2) Roupa - (3) Alimento - (0) Cancelar");
+
+                    int opcao2 = sc.nextInt();
+                    sc.nextLine(); // Consumir a quebra de linha pendente
+
+                    switch (opcao2) {
+                        case 0:
+                            break; // Volta ao menu principal
+                        case 1:
+                            System.out.println("Alterando Eletrônico...");
+                            break;
+                        case 2:
+                            System.out.println("Alterando Roupa...");
+                            break;
+                        case 3:
+                            System.out.println("Alterando Alimento...");
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                            break;
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("O que Você deseja Excluir? \n" +
+                            "(1) Eletronico - (2) Roupa - (3) Alimento - (0) Cancelar");
+
+                    int opcao3 = sc.nextInt();
+                    sc.nextLine(); // Consumir a quebra de linha pendente
+
+                    switch (opcao3) {
+                        case 0:
+                            break; // Volta ao menu principal
+                        case 1:
+                            System.out.println("Excluindo Eletrônico...");
+                            break;
+                        case 2:
+                            System.out.println("Excluindo Roupa...");
+                            break;
+                        case 3:
+                            System.out.println("Excluindo Alimento...");
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                            break;
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("O que Você deseja listar? \n" +
+                            "(1) Eletronico - (2) Roupa - (3) Alimento - (0) Cancelar");
+
+                    int opcao4 = sc.nextInt();
+                    sc.nextLine(); // Consumir a quebra de linha pendente
+
+                    switch (opcao4) {
+                        case 0:
+                            break; // Volta ao menu principal
+                        case 1:
+                            System.out.println("Listando Eletrônico...");
+                            break;
+                        case 2:
+                            System.out.println("Listando Roupa...");
+                            break;
+                        case 3:
+                            System.out.println("Listando Alimento...");
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                            break;
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Obrigado, Volte sempre!");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
+            }
+        } while (opcao != 5); // Repete até que o usuário escolha sair (opção 5)
+
+        sc.close(); // Fecha o Scanner
+    }
+}
+
+class Menu {
+    public int imprimirMensagem(Scanner sc) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~ Bem Vindo ~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Escolha uma das Opções: \n" +
+                "(1) - Incluir \n" +
+                "(2) - Alterar \n" +
+                "(3) - Excluir \n" +
+                "(4) - Listar \n" +
+                "(5) - Sair");
+
+        return sc.nextInt();  // Retorna a opção escolhida pelo usuário
     }
 }
