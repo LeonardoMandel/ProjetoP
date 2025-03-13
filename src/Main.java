@@ -143,7 +143,52 @@ public class Main {
                         case 0:
                             break; // Volta ao menu principal
                         case 1:
-                            System.out.println("Alterando Eletrônico...");
+                            System.out.println("Qual eletrônico deseja alterar?");
+                            // Exibe a lista de eletrônicos disponíveis
+                            for (int i = 0; i < eletronicos.size(); i++) {
+                                System.out.println("Índice " + i + ":");
+                                eletronicos.get(i).exibirInformacoes();
+                                System.out.println("-----------------------------");
+                            }
+
+                            // Solicita o índice do eletrônico a ser alterado
+                            System.out.print("Digite o índice do eletrônico que deseja alterar: ");
+                            int indice = sc.nextInt();
+                            sc.nextLine(); // Consumir a quebra de linha pendente
+
+                            // Verifica se o índice é válido
+                            if (indice >= 0 && indice < eletronicos.size()) {
+                                Eletronico eletronico = eletronicos.get(indice); // Obtém o eletrônico selecionado
+
+                                // Solicita os novos dados
+                                System.out.print("Novo nome: ");
+                                String novoNome = sc.nextLine();
+
+                                System.out.print("Novo código: ");
+                                String novoCodigo = sc.nextLine();
+
+                                System.out.print("Novo valor: ");
+                                double novoValor = sc.nextDouble();
+                                sc.nextLine(); // Consumir a quebra de linha pendente
+
+                                System.out.print("Nova marca: ");
+                                String novaMarca = sc.nextLine();
+
+                                System.out.print("Nova garantia (em meses): ");
+                                int novaGarantia = sc.nextInt();
+                                sc.nextLine(); // Consumir a quebra de linha pendente
+
+                                // Atualiza os atributos do eletrônico
+                                eletronico.setNome(novoNome);
+                                eletronico.setCodigo(novoCodigo);
+                                eletronico.setValor(novoValor);
+                                eletronico.setMarca(novaMarca);
+                                eletronico.setGarantiaMeses(novaGarantia);
+
+                                System.out.println("Eletrônico alterado com sucesso!");
+                            } else {
+                                System.out.println("Índice inválido!");
+                            }
                             break;
                         case 2:
                             System.out.println("Alterando Roupa...");
@@ -194,12 +239,24 @@ public class Main {
                             break; // Volta ao menu principal
                         case 1:
                             System.out.println("Listando Eletrônico...");
+                            for (Eletronico eletronico : eletronicos) {
+                                eletronico.exibirInformacoes();
+                                System.out.println("-----------------------------");
+                            }
                             break;
                         case 2:
                             System.out.println("Listando Roupa...");
+                            for (Roupa roupa : roupas) {
+                                roupa.exibirInformacoes();
+                                System.out.println("-----------------------------");
+                            }
                             break;
                         case 3:
                             System.out.println("Listando Alimento...");
+                            for (Alimento alimento : alimentos) {
+                                alimento.exibirInformacoes();
+                                System.out.println("-----------------------------");
+                            }
                             break;
                         default:
                             System.out.println("Opção inválida.");
